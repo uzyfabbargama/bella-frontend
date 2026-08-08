@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bella - Tu espejo emocional</title>
+    <style>
+        body { font-family: Arial; background: #0a0a0a; color: #eee; }
+        #chat { height: 400px; overflow-y: auto; border: 1px solid #333; padding: 10px; }
+        .user { color: #4fc3f7; }
+        .bella { color: #ffb74d; }
+        input { width: 80%; padding: 10px; }
+        button { padding: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Bella</h1>
+    <div id="chat"></div>
+    <input id="msg" placeholder="Escribe algo...">
+    <button onclick="send()">Enviar</button>
+    
+    <script>
+        async function send() {
+            const msg = document.getElementById('msg').value;
+            const chat = document.getElementById('chat');
+            chat.innerHTML += `<div class="user">Tú: ${msg}</div>`;
+            
+            const response = await fetch('http://tuserver.ddns.net:8080/chat', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({message: msg, user_id: 'anonimo'})
+            });
+            const data = await response.json();
+            chat.innerHTML += `<div class="bella">Bella: ${data.response}</div>`;
+            chat.scrollTop = chat.scrollHeight;
+            document.getElementById('msg').value = '';
+        }
+    </script>
+</body>
+</html>
