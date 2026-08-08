@@ -12,10 +12,27 @@ CORS(app)  # Permite conexiones desde cualquier frontend
 bella = BellaSubconsciente(archivo_xrp="bella.xrp")
 
 @app.route('/chat', methods=['POST'])
+@app.route('/chat', methods=['POST'])
 def chat():
     data = request.json
     user_message = data.get('message', '')
     user_id = data.get('user_id', 'anonimo')
+    
+    # === PROCESAR MENSAJE CON BELLA ===
+    # 1. Entrenar a Bella con el mensaje del usuario
+    bella.entrenar(user_message)
+    
+    # 2. Obtener respuesta de Bella (susurro)
+    respuesta = bella.susurrar(cantidad_palabras=10)
+    
+    # 3. Guardar estado (opcional)
+    # bella.guardar()
+    
+    return jsonify({
+        'response': respuesta,
+        'status': 'ok',
+        'user_id': user_id
+    })
     
     # 1. Procesar mensaje con BHL
     # 2. Actualizar Numeraso
