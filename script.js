@@ -205,3 +205,4 @@ sync function crearPersonaje() {
         alert('Error: ' + e.message);
     }
 }
+ 
