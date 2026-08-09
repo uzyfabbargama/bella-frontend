@@ -136,6 +136,16 @@
             // Redirigir a página de creación (a implementar)
             alert('Función de creación de personajes (próximamente)');
         }
+        function volverAHome() {
+            document.getElementById('auth').style.display = 'block';
+            document.getElementById('personajes').style.display = 'none';
+            document.getElementById('chat-container').style.display = 'none';
+        }
+            
+        function volverAPersonajes() {
+            document.getElementById('personajes').style.display = 'block';
+            document.getElementById('chat-container').style.display = 'none';
+        }
     </script>
 </body>
 </html>
