@@ -72,7 +72,51 @@ async function cargarPersonajes() {
         });
     } catch (e) { alert('Error cargando personajes: ' + e.message); }
 }
+function actualizarDesdeSlider(id) {
+    const slider = document.getElementById(id);
+    const num = document.getElementById(id + '-num');
+    const valor = document.getElementById(id + '-valor');
+    num.value = slider.value;
+    valor.textContent = slider.value;
+}
 
+function actualizarDesdeNumero(id) {
+    const num = document.getElementById(id + '-num');
+    const slider = document.getElementById(id);
+    const valor = document.getElementById(id + '-valor');
+    let val = parseInt(num.value);
+    if (isNaN(val)) val = 0;
+    if (val < 0) val = 0;
+    if (val > 1000) val = 1000;
+    slider.value = val;
+    valor.textContent = val;
+}
+
+function aplicarPlantilla() {
+    const plantilla = document.getElementById('plantilla').value;
+    const valores = {
+        heroe: { bondad: 700, hostilidad: 200, logica: 600, ambicion: 500, miedo: 300, posesividad: 400 },
+        villano: { bondad: 200, hostilidad: 800, logica: 300, ambicion: 700, miedo: 600, posesividad: 800 },
+        sabio: { bondad: 500, hostilidad: 300, logica: 800, ambicion: 400, miedo: 300, posesividad: 200 },
+        amigo: { bondad: 800, hostilidad: 100, logica: 400, ambicion: 300, miedo: 200, posesividad: 300 },
+        loco: { bondad: 300, hostilidad: 600, logica: 100, ambicion: 400, miedo: 700, posesividad: 500 }
+    };
+    
+    if (plantilla === 'personalizado') return;
+    
+    const v = valores[plantilla];
+    if (!v) return;
+    
+    // Aplicar valores a cada slider y número
+    ['bondad', 'hostilidad', 'logica', 'ambicion', 'miedo', 'posesividad'].forEach(key => {
+        const slider = document.getElementById(key);
+        const num = document.getElementById(key + '-num');
+        const valor = document.getElementById(key + '-valor');
+        slider.value = v[key];
+        num.value = v[key];
+        valor.textContent = v[key];
+    });
+}
 function iniciarChat(nombre) {
     personajeActual = nombre;
     document.getElementById('chat').innerHTML = '';
