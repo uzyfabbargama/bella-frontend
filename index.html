@@ -2,150 +2,79 @@
 <html>
 <head>
     <title>Bella - Tu espejo emocional</title>
-    <style>
-        body { font-family: Arial; background: #0a0a0a; color: #eee; }
-        #chat { height: 400px; overflow-y: auto; border: 1px solid #333; padding: 10px; }
-        .user { 
-            color: #4fc3f7; 
-            text-shadow: 0 0 10px rgba(79, 195, 247, 0.3); 
-        }
-        .bella { 
-            color: #ffb74d; 
-            text-shadow: 0 0 10px rgba(255, 183, 77, 0.3); 
-        }
-        input { width: 80%; padding: 10px; }
-        button { padding: 10px; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Bella</h1>
-    
-    <!-- Login/Registro -->
-    <div id="auth">
+    <h1>🌙 Bella</h1>
+
+    <!-- ===== SECCIÓN 1: AUTH ===== -->
+    <div id="auth" class="seccion">
         <input id="username" placeholder="Usuario">
         <input id="password" type="password" placeholder="Contraseña">
         <button onclick="registrar()">Registrar</button>
         <button onclick="login()">Iniciar Sesión</button>
     </div>
-    
-    <!-- Selección de personaje -->
-    <div id="personajes" style="display:none;">
+
+    <!-- ===== SECCIÓN 2: PERSONAJES ===== -->
+    <div id="personajes" class="seccion" style="display:none;">
         <h2>Selecciona un personaje</h2>
         <div id="lista-personajes"></div>
-        <button onclick="crearPersonaje()">Crear personaje</button>
-        <!-- Dentro de la selección de personajes -->
-        <button onclick="volverAHome()">⬅ Volver</button>
+        <button onclick="mostrarSeccion('creador')">✨ Crear personaje</button>
+        <button class="volver" onclick="volverAHome()">⬅ Volver</button>
     </div>
-    
-    <!-- Chat -->
-    <div id="chat-container" style="display:none;">
+
+    <!-- ===== SECCIÓN 3: CHAT ===== -->
+    <div id="chat-container" class="seccion" style="display:none;">
         <div id="chat"></div>
         <input id="msg" placeholder="Escribe algo...">
         <button onclick="enviarMensaje()">Enviar</button>
-        <!-- Dentro del chat -->
-        <button onclick="volverAPersonajes()">⬅ Volver a personajes</button>
+        <button class="volver" onclick="volverAPersonajes()">⬅ Volver a personajes</button>
     </div>
-    
-    <script>
-        const API_URL = 'https://compromise-bare-comparisons-room.trycloudflare.com';
-        let token = null;
-        let usuarioActual = null;
-        let personajeActual = null;
-        function crearPersonaje() {
-            // Redirigir a página de creación (a implementar)
-            alert('Función de creación de personajes (próximamente)');
-        }
-        function volverAHome() {
-            document.getElementById('auth').style.display = 'block';
-            document.getElementById('personajes').style.display = 'none';
-            document.getElementById('chat-container').style.display = 'none';
-        }
-            
-        function volverAPersonajes() {
-            document.getElementById('personajes').style.display = 'block';
-            document.getElementById('chat-container').style.display = 'none';
-        }
-        async function registrar() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            const response = await fetch(`${API_URL}/api/register`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({username, password})
-            });
-            const data = await response.json();
-            alert(data.message || data.status);
-        }
+
+    <!-- ===== SECCIÓN 4: CREADOR DE PERSONAJES ===== -->
+    <div id="creador" class="seccion" style="display:none;">
+        <h2>✨ Crear nuevo personaje</h2>
         
-        async function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            const response = await fetch(`${API_URL}/api/login`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({username, password})
-            });
-            const data = await response.json();
-            
-            if (data.status === 'success') {
-                token = data.token;
-                usuarioActual = username;
-                document.getElementById('auth').style.display = 'none';
-                document.getElementById('personajes').style.display = 'block';
-                cargarPersonajes();
-            } else {
-                alert('Error: ' + data.message);
-            }
-        }
-        
-        async function cargarPersonajes() {
-            const response = await fetch(`${API_URL}/api/personajes`);
-            const data = await response.json();
-            
-            const lista = document.getElementById('lista-personajes');
-            lista.innerHTML = '';
-            
-            data.personajes.forEach(p => {
-                const btn = document.createElement('button');
-                btn.textContent = p.nombre;
-                btn.onclick = () => iniciarChat(p.nombre);
-                lista.appendChild(btn);
-            });
-        }
-        
-        function iniciarChat(nombre) {
-            personajeActual = nombre;
-            document.getElementById('personajes').style.display = 'none';
-            document.getElementById('chat-container').style.display = 'block';
-            document.getElementById('chat').innerHTML = '';
-        }
-        
-        async function enviarMensaje() {
-            const msg = document.getElementById('msg').value;
-            if (!msg) return;
-            
-            const chat = document.getElementById('chat');
-            chat.innerHTML += `<div class="user">Tú: ${msg}</div>`;
-            document.getElementById('msg').value = '';
-            
-            const response = await fetch(`${API_URL}/api/chat/${personajeActual}`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({mensaje: msg, usuario: usuarioActual})
-            });
-            const data = await response.json();
-            
-            if (data.status === 'success') {
-                chat.innerHTML += `<div class="bella">${personajeActual}: ${data.respuesta}</div>`;
-                chat.scrollTop = chat.scrollHeight;
-            } else {
-                chat.innerHTML += `<div class="bella">Error: ${data.message}</div>`;
-            }
-        }
-        
-        
-    </script>
+        <input id="nombre-personaje" placeholder="Nombre del personaje">
+        <textarea id="intro-personaje" placeholder="Introducción..."></textarea>
+        <textarea id="peculiaridad-personaje" placeholder="Peculiaridad..."></textarea>
+
+        <h3>Ajustes de personalidad</h3>
+        <div class="slider-container">
+            <label>Bondad</label>
+            <input type="range" id="bondad" min="0" max="1000" value="500" oninput="actualizarValor('bondad')">
+            <span id="bondad-valor">500</span>
+        </div>
+        <div class="slider-container">
+            <label>Hostilidad</label>
+            <input type="range" id="hostilidad" min="0" max="1000" value="500" oninput="actualizarValor('hostilidad')">
+            <span id="hostilidad-valor">500</span>
+        </div>
+        <div class="slider-container">
+            <label>Lógica</label>
+            <input type="range" id="logica" min="0" max="1000" value="500" oninput="actualizarValor('logica')">
+            <span id="logica-valor">500</span>
+        </div>
+        <div class="slider-container">
+            <label>Ambiición</label>
+            <input type="range" id="ambicion" min="0" max="1000" value="500" oninput="actualizarValor('ambicion')">
+            <span id="ambicion-valor">500</span>
+        </div>
+        <div class="slider-container">
+            <label>Miedo</label>
+            <input type="range" id="miedo" min="0" max="1000" value="500" oninput="actualizarValor('miedo')">
+            <span id="miedo-valor">500</span>
+        </div>
+        <div class="slider-container">
+            <label>Posesividad</label>
+            <input type="range" id="posesividad" min="0" max="1000" value="500" oninput="actualizarValor('posesividad')">
+            <span id="posesividad-valor">500</span>
+        </div>
+
+        <button onclick="crearPersonaje()">🚀 Crear personaje</button>
+        <button class="volver" onclick="volverAPersonajes()">⬅ Volver</button>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
