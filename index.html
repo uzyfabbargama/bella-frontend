@@ -14,7 +14,14 @@
         <button onclick="registrar()">Registrar</button>
         <button onclick="login()">Iniciar Sesión</button>
     </div>
-    <!-- Selección de plantillas -->
+
+    <!-- ===== SECCIÓN 2: PERSONAJES ===== -->
+    <div id="personajes" class="seccion" style="display:none;">
+        <h2>Selecciona un personaje</h2>
+        <div id="lista-personajes"></div>
+        <button onclick="mostrarSeccion('creador')">✨ Crear personaje</button>
+        <button class="volver" onclick="volverAHome()">⬅ Volver</button>
+            <!-- Selección de plantillas -->
     <label for="plantilla">Plantilla rápida:</label>
     <select id="plantilla" onchange="aplicarPlantilla()">
         <option value="personalizado">🔧 Personalizado</option>
@@ -24,12 +31,6 @@
         <option value="amigo">🤝 Amigo (B:800, H:100, L:400)</option>
         <option value="loco">🤪 Loco (B:300, H:600, L:100)</option>
     </select>
-    <!-- ===== SECCIÓN 2: PERSONAJES ===== -->
-    <div id="personajes" class="seccion" style="display:none;">
-        <h2>Selecciona un personaje</h2>
-        <div id="lista-personajes"></div>
-        <button onclick="mostrarSeccion('creador')">✨ Crear personaje</button>
-        <button class="volver" onclick="volverAHome()">⬅ Volver</button>
     </div>
 
     <!-- ===== SECCIÓN 3: CHAT ===== -->
