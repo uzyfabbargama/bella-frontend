@@ -22,15 +22,6 @@
         <button onclick="mostrarSeccion('creador')">✨ Crear personaje</button>
         <button class="volver" onclick="volverAHome()">⬅ Volver</button>
             <!-- Selección de plantillas -->
-    <label for="plantilla">Plantilla rápida:</label>
-    <select id="plantilla" onchange="aplicarPlantilla()">
-        <option value="personalizado">🔧 Personalizado</option>
-        <option value="heroe">🦸 Héroe (B:700, H:200, L:600)</option>
-        <option value="villano">👹 Villano (B:200, H:800, L:300)</option>
-        <option value="sabio">🧙 Sabio (B:500, H:300, L:800)</option>
-        <option value="amigo">🤝 Amigo (B:800, H:100, L:400)</option>
-        <option value="loco">🤪 Loco (B:300, H:600, L:100)</option>
-    </select>
     </div>
 
     <!-- ===== SECCIÓN 3: CHAT ===== -->
@@ -52,6 +43,15 @@
         <textarea id="peculiaridad-personaje" placeholder="Peculiaridad..."></textarea>
         <!-- Cada slider ahora tiene un input numérico -->
         <h3>Ajustes de personalidad</h3>
+        <label for="plantilla">Plantilla rápida:</label>
+    <select id="plantilla" onchange="aplicarPlantilla()">
+        <option value="personalizado">🔧 Personalizado</option>
+        <option value="heroe">🦸 Héroe (B:700, H:200, L:600)</option>
+        <option value="villano">👹 Villano (B:200, H:800, L:300)</option>
+        <option value="sabio">🧙 Sabio (B:500, H:300, L:800)</option>
+        <option value="amigo">🤝 Amigo (B:800, H:100, L:400)</option>
+        <option value="loco">🤪 Loco (B:300, H:600, L:100)</option>
+    </select>
         <!-- > Bondad -->
         <div class="slider-container">
             <label>Bondad</label>
