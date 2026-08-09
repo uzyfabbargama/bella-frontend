@@ -120,7 +120,26 @@ async function crearPersonaje() {
     const ambicion = document.getElementById('ambicion').value;
     const miedo = document.getElementById('miedo').value;
     const posesividad = document.getElementById('posesividad').value;
-
+    const fileInput = document.getElementById('imagen-personaje');
+    let imagenBase64 = '';
+    
+    if (fileInput.files && fileInput.files[0]) {
+        const file = fileInput.files[0];
+        const reader = new FileReader();
+        
+        // Convertir a base64 (síncrono para simplificar)
+        imagenBase64 = await new Promise((resolve) => {
+            reader.onload = (e) => resolve(e.target.result);
+            reader.readAsDataURL(file);
+        });
+    }
+    
+    const payload = {
+        nombre, intro, peculiaridad,
+        bondad, hostilidad, logica,
+        ambicion, miedo, posesividad,
+        imagen: imagenBase64  // <--- Ahora envía la imagen
+    };
     if (!nombre || !intro || !peculiaridad) {
         return alert('Nombre, introducción y peculiaridad son obligatorios');
     }
