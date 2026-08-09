@@ -154,7 +154,7 @@ function actualizarValor(id) {
     document.getElementById(id + '-valor').textContent = valor;
 }
 
-async function crearPersonaje() {
+sync function crearPersonaje() {
     const nombre = document.getElementById('nombre-personaje').value.trim();
     const intro = document.getElementById('intro-personaje').value.trim();
     const peculiaridad = document.getElementById('peculiaridad-personaje').value.trim();
@@ -170,28 +170,22 @@ async function crearPersonaje() {
     if (fileInput.files && fileInput.files[0]) {
         const file = fileInput.files[0];
         const reader = new FileReader();
-        
-        // Convertir a base64 (síncrono para simplificar)
         imagenBase64 = await new Promise((resolve) => {
             reader.onload = (e) => resolve(e.target.result);
             reader.readAsDataURL(file);
         });
     }
     
-    const payload = {
-        nombre, intro, peculiaridad,
-        bondad, hostilidad, logica,
-        ambicion, miedo, posesividad,
-        imagen: imagenBase64  // <--- Ahora envía la imagen
-    };
     if (!nombre || !intro || !peculiaridad) {
         return alert('Nombre, introducción y peculiaridad son obligatorios');
     }
 
+    // --- SOLO UN PAYLOAD ---
     const payload = {
         nombre, intro, peculiaridad,
         bondad, hostilidad, logica,
-        ambicion, miedo, posesividad
+        ambicion, miedo, posesividad,
+        imagen: imagenBase64
     };
 
     try {
