@@ -14,7 +14,16 @@
         <button onclick="registrar()">Registrar</button>
         <button onclick="login()">Iniciar Sesión</button>
     </div>
-
+    <!-- Selección de plantillas -->
+    <label for="plantilla">Plantilla rápida:</label>
+    <select id="plantilla" onchange="aplicarPlantilla()">
+        <option value="personalizado">🔧 Personalizado</option>
+        <option value="heroe">🦸 Héroe (B:700, H:200, L:600)</option>
+        <option value="villano">👹 Villano (B:200, H:800, L:300)</option>
+        <option value="sabio">🧙 Sabio (B:500, H:300, L:800)</option>
+        <option value="amigo">🤝 Amigo (B:800, H:100, L:400)</option>
+        <option value="loco">🤪 Loco (B:300, H:600, L:100)</option>
+    </select>
     <!-- ===== SECCIÓN 2: PERSONAJES ===== -->
     <div id="personajes" class="seccion" style="display:none;">
         <h2>Selecciona un personaje</h2>
@@ -40,39 +49,62 @@
         <input id="nombre-personaje" placeholder="Nombre del personaje">
         <textarea id="intro-personaje" placeholder="Introducción..."></textarea>
         <textarea id="peculiaridad-personaje" placeholder="Peculiaridad..."></textarea>
-
+        <!-- Cada slider ahora tiene un input numérico -->
         <h3>Ajustes de personalidad</h3>
+        <!-- > Bondad -->
         <div class="slider-container">
             <label>Bondad</label>
-            <input type="range" id="bondad" min="0" max="1000" value="500" oninput="actualizarValor('bondad')">
+            <input type="range" id="bondad" min="0" max="1000" value="500" 
+                   oninput="actualizarDesdeSlider('bondad')">
+            <input type="number" id="bondad-num" min="0" max="1000" value="500" 
+                   onchange="actualizarDesdeNumero('bondad')">
             <span id="bondad-valor">500</span>
         </div>
+        <!--> Hostilidad -->
         <div class="slider-container">
             <label>Hostilidad</label>
-            <input type="range" id="hostilidad" min="0" max="1000" value="500" oninput="actualizarValor('hostilidad')">
+            <input type="range" id="hostilidad" min="0" max="1000" value="500" 
+                   oninput="actualizarDesdeSlider('hostilidad')">
+            <input type="number" id="hostilidad-num" min="0" max="1000" value="500" 
+                   onchange="actualizarDesdeNumero('hostilidad')">
             <span id="hostilidad-valor">500</span>
         </div>
+        <!--> Lógica -->
         <div class="slider-container">
             <label>Lógica</label>
-            <input type="range" id="logica" min="0" max="1000" value="500" oninput="actualizarValor('logica')">
+            <input type="range" id="logica" min="0" max="1000" value="500" 
+                   oninput="actualizarDesdeSlider('logica')">
+            <input type="number" id="logica-num" min="0" max="1000" value="500" 
+                   onchange="actualizarDesdeNumero('logica')">
             <span id="logica-valor">500</span>
         </div>
+        <!--> Ambición -->
         <div class="slider-container">
-            <label>Ambiición</label>
-            <input type="range" id="ambicion" min="0" max="1000" value="500" oninput="actualizarValor('ambicion')">
+            <label>Ambicion</label>
+            <input type="range" id="ambicion" min="0" max="1000" value="500" 
+                   oninput="actualizarDesdeSlider('ambicion')">
+            <input type="number" id="ambicion-num" min="0" max="1000" value="500" 
+                   onchange="actualizarDesdeNumero('ambicion')">
             <span id="ambicion-valor">500</span>
         </div>
+        <!--> Miedo -->
         <div class="slider-container">
             <label>Miedo</label>
-            <input type="range" id="miedo" min="0" max="1000" value="500" oninput="actualizarValor('miedo')">
+            <input type="range" id="miedo" min="0" max="1000" value="500" 
+                   oninput="actualizarDesdeSlider('miedo')">
+            <input type="number" id="miedo-num" min="0" max="1000" value="500" 
+                   onchange="actualizarDesdeNumero('miedo')">
             <span id="miedo-valor">500</span>
         </div>
+        <!--> Posesividad -->
         <div class="slider-container">
             <label>Posesividad</label>
-            <input type="range" id="posesividad" min="0" max="1000" value="500" oninput="actualizarValor('posesividad')">
+            <input type="range" id="posesividad" min="0" max="1000" value="500" 
+                   oninput="actualizarDesdeSlider('posesividad')">
+            <input type="number" id="posesividad-num" min="0" max="1000" value="500" 
+                   onchange="actualizarDesdeNumero('posesividad')">
             <span id="posesividad-valor">500</span>
         </div>
-
         <button onclick="crearPersonaje()">🚀 Crear personaje</button>
         <button class="volver" onclick="volverAPersonajes()">⬅ Volver</button>
     </div>
