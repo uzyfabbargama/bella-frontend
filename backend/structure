@@ -1,0 +1,19 @@
+server-test/
+├── server-data/
+│   ├── personajes/
+│   │   └── [nombre_personaje]/
+│   │       ├── nucleo.json
+│   │       ├── icon.png
+│   │       ├── intro.txt
+│   │       ├── peculiarity.txt
+│   │       └── USERS/
+│   │           └── [nombre_usuario]/
+│   │               └── [chat_id]/
+│   │                   ├── Hystory.json
+│   │                   └── Neuronal_map.xrp
+│   ├── usuarios/
+│   │   └── [nombre_usuario].xs
+│   └── config.json
+├── server_bhl.py
+├── xor_auth.py
+└── bhl_opt.py

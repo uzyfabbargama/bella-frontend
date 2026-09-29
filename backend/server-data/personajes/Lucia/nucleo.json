@@ -1,0 +1,15 @@
+{
+    "nucleo": {
+        "icon": "",
+        "name": "Lucia",
+        "intro": "intro.txt",
+        "peculiarity": "peculiarity.txt",
+        "initial_Bondad": 347,
+        "initial_Hostilidad": 764,
+        "initial_Logica": 271,
+        "initial_Ambicion": 731,
+        "initial_Miedo": 427,
+        "initial_Posesividad": 633,
+        "datetime": "2026-08-09T13:12:07.918833"
+    }
+}

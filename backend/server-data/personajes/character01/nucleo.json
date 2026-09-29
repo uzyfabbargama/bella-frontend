@@ -1,0 +1,11 @@
+{
+	"nucleo" : {
+		"icon" : "image.png",
+		"name" : "character01",
+		"intro" : "intro.txt",
+		"peculiarity" : "peculiarity.txt",
+		"initial_Bondad" : 100,
+		"initial_Hostilidad" : 200,
+		"initial_Logica" : 300
+	}
+}
