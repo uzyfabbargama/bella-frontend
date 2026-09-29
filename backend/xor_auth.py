@@ -24,8 +24,8 @@ def xorid(texto):
 def guardar_usuario(username, password, saldo=0, invert=0):
     """Guarda un usuario con ofuscación total."""
     # 1. Calcular IDs reales
-    user_id = xorid(username)
-    pass_id = xorid(password)
+    user_id = xorid(username)*len(username)
+    pass_id = (xorid(password)*len(password))
     
     # 2. Ofuscar con constantes
     user_trit = K_USER + user_id
